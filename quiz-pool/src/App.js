@@ -1,15 +1,14 @@
-import './App.css';
+import './CSS/App.css';
+import {useRoutes} from "react-router-dom";
+import LoginPage from "./Pages/Login-Page";
+const App = () => {
+    return useRoutes([
+        {
+            path: "/",
+            element: <LoginPage/>,
+        },
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
-  );
-}
+    ]);
+};
 
 export default App;
