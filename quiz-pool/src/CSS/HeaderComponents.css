@@ -13,3 +13,10 @@
 .he-2 {
     color: #2ECC71;
 }
+
+@media only screen and (max-width: 900px) {
+    .logo{
+        justify-content: center;
+        text-align: center;
+    }
+}
