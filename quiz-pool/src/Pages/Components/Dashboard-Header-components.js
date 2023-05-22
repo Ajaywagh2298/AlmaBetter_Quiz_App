@@ -1,18 +1,24 @@
-import {Link} from "react-router-dom";
-import '../../CSS/HeaderComponents.css';
-import React from "react";
-import  logos  from "../../assets/Icon/logos.jpg";
+import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
-let simpleHeaderComponents = () => {
+const DashboardHeaderComponents =()=> {
     return (
-        <nav className="navbar navbar-expand-sm bg-body-tertiary shadow-lg p-1 mb-2 m-2 bg-white rounded">
-            <div className="container-fluid">
-                <Link className="navbar-brand d-flex" href="#" to={"/"}>
-                    <img src={ logos } alt="quiz" width="50" height="50" className="logo align-top"/>
-                </Link>
-            </div>
-        </nav>
-    )
+        <Box sx={{flexGrow: 1}}>
+            <AppBar position="static">
+                <Toolbar>
+                    <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+                        News
+                    </Typography>
+                    <Button color="inherit">Home</Button>
+                    <Button color="inherit">My Quiz</Button>
+                </Toolbar>
+            </AppBar>
+        </Box>
+    );
 }
 
-export default simpleHeaderComponents;
+export default DashboardHeaderComponents;

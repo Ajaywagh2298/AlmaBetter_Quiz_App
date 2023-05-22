@@ -1,11 +1,11 @@
 import './CSS/App.css';
 import {useRoutes} from "react-router-dom";
-import LoginPage from "./Pages/Login-Page";
+import DashboardPage from "./Pages/Dashboard-Page";
 const App = () => {
     return useRoutes([
         {
             path: "/",
-            element: <LoginPage/>,
+            element: <DashboardPage/>,
         },
 
     ]);
