@@ -4,7 +4,7 @@ const DashboardPage = () => {
     return (
         <div>
             <DashboardHeaderComponents/>
-            <h1>Dashboard</h1>
+            <h1>Janhavi Dashboard</h1>
         </div>
     )
 }
