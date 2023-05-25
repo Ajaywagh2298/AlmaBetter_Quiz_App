@@ -4,6 +4,10 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+
+
+
 
 const DashboardHeaderComponents =()=> {
     return (
@@ -13,8 +17,9 @@ const DashboardHeaderComponents =()=> {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         News
                     </Typography>
-                    <Button color="inherit">Home</Button>
+                    <Link to="DashboardHeaderComponents" color="inherit">Home</Link>
                     <Button color="inherit">My Quiz</Button>
+                    <Link to="QuestionModal" className=""color="inherit" >create-quiz</Link>
                 </Toolbar>
             </AppBar>
         </Box>
