@@ -5,7 +5,12 @@
     padding: 0;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
-
+.logo{
+        justify-content: center;
+        text-align: center;
+        width: 150px;
+        height: 40px;
+    }
 .he-1 {
     color: #DE3163;
 }
@@ -18,5 +23,14 @@
     .logo{
         justify-content: center;
         text-align: center;
+        width: 100px;
+        height: 50px;
     }
+}
+.bar {
+    background-color: #E5E8E8;
+}
+
+.nav-button {
+    color: #34495E;
 }
