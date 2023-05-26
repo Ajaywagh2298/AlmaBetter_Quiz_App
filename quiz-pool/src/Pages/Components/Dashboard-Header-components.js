@@ -17,7 +17,7 @@ const DashboardHeaderComponents =()=> {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         News
                     </Typography>
-                    <Link to="DashboardHeaderComponents" color="inherit">Home</Link>
+                    <Link to="/" color="inherit">Home</Link>
                     <Button color="inherit">My Quiz</Button>
                     <Link to="QuestionModal" className=""color="inherit" >create-quiz</Link>
                 </Toolbar>
