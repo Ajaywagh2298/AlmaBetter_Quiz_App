@@ -73,8 +73,10 @@ export default function QuestionModal() {
       {click && selectedOption === "mcqmulti" && <McqMulti />}
       {click && selectedOption === "shortanswer" && <ShortAnswer />}
       {click && selectedOption === "descriptive" && <Descriptive />}
-
-
+      
+      <Button variant="contained" color="primary"   >
+          Submit Quiz
+        </Button>
     </div>
   );
 }
