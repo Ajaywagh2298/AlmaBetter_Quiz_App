@@ -1,0 +1,30 @@
+{
+  "uid": 98085226627,
+  "title": "my",
+  "description": "quiz",
+  "fromDate": "12/02/2022",
+  "toDate": "12/02/2022",
+  "quiz": [
+    {
+      "question": "my name",
+      "option": [
+        "Ajay",
+        "answer",
+        "dd",
+        "loce"
+      ],
+      "ans": 1
+    },
+    {
+      "question": "my name 1",
+      "option": [
+        "Ajay 1",
+        "answer 1",
+        "dd 1",
+        "loce 1"
+      ],
+      "ans": 3
+    }
+  ],
+  "mark": 20
+}

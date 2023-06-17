@@ -1,0 +1,18 @@
+
+API  : localhost:8000/api/users/create
+
+BODY : {
+    "username": " Test username",
+    "password": "223232",
+    "email": "test@user.in"
+}
+
+API : localhost:8000/api/users/login
+
+BODY : {
+    "username": " Test username",
+    "password": "223232"
+}
+
+
+
