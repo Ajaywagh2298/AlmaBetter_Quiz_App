@@ -4,11 +4,13 @@ const accessCredentials = require('../utils/authUtils').accessCredentials;
 const { checkFolderExists, checkFileExists } = require('../utils/fileUtils');
 
 const createUsers = async (req, res) => {
+    const fullName = req.body.fullName;
     const username = req.body.username;
     const password = req.body.password;
     const email = req.body.email;
     const userData = {
         uid : Math.floor(Math.random() * 1000000000),
+        fullName: fullName,
         username: username,
         password: password,
         email: email,
@@ -33,10 +35,17 @@ const createUsers = async (req, res) => {
                 //         error: 'Username already exists.',
                 //     });
                 // }
+             let regex = /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/;
+                if (!regex.test(users[i].email)) {
+                    return res.status(400).json({
+                        statusCode: 400,
+                        error: 'Invalid Email.',
+                    });
+                }
                 if (users[i].email === email) {
                     return res.status(400).json({
                         statusCode: 400,
-                        error: 'Email already exists.',
+                        error: 'Email Already Exists.',
                     });
                 }
          }
