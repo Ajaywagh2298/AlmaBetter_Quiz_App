@@ -1,203 +1,171 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
+
+//import axios from 'axios';
 import Button from '@mui/material/Button';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import CssBaseline from '@mui/material/CssBaseline';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import { pink } from '@mui/material/colors';
-import EditIcon from '@mui/icons-material/Edit';
-import Fab from '@mui/material/Fab';
+import { teal} from '@mui/material/colors';
 
 
 
 const McqSingle = () => {
-  let obj = {};
-  const [inputText, setInputText] = React.useState(obj);
-  const [inputList, setInputList] = React.useState([]);
-  const [count, setCount] = React.useState(0);
-  const [optionList, setOptionList] = React.useState([]);
-  const deleteBtnHandler = (id) => {
-    const temp = inputList.filter((el) =>
-      el.id !== id)
-    setInputList(temp);
 
-  }
-
-  const editBtnHandler = (id) => {
-    const temp = inputList.map(el => {
-      if (el.id === id) {
-        var questionedit = prompt("Edit the question or else click okay without edditing");
-              return {
-          ...el,
-          question: questionedit,
-          
-        }
-      }
-      else
-        return el
-
-    })
-
-    setInputList(temp)
-
-  }
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [questions, setQuestions] = useState([{ text: '', options: ['', '', '',''], answerIndex: 0 }]);
 
 
-  const onSave = (inputText) => {
-    if (count >= 2) {
-      let payload = [...inputList, {
-        id: Date.now(),
-        question: inputText.question,
-        option: inputText
+  const handleQuestionChange = (event, questionIndex) => {
+    const { name, value } = event.target;
+    const updatedQuestions = [...questions];
+    updatedQuestions[questionIndex][name] = value;
+    setQuestions(updatedQuestions);
+  };
 
-      }]
-      setInputList(payload);
-    }
-    else alert("You have add atleast 2 option to save the question")
-  }
+  const handleOptionChange = (event, questionIndex, optionIndex) => {
+    const { value } = event.target;
+    const updatedQuestions = [...questions];
+    updatedQuestions[questionIndex].options[optionIndex] = value;
+    setQuestions(updatedQuestions);
+  };
 
-  const clickHandler = (option) => {
-    if (count !== 4) {
-      let payload = [...optionList, {
-        id: Date.now(),
-        option: option,
+  const handleAddQuestion = () => {
+    
+    const newQuestion = { text: '', options: ['', '', '',''], answerIndex: 0 };
+    setQuestions([...questions, newQuestion]);
+  
+  };
 
-      }];
-      setOptionList(payload);
+  const handleRemoveQuestion = questionIndex => {
+    const updatedQuestions = [...questions];
+    updatedQuestions.splice(questionIndex, 1);
+    setQuestions(updatedQuestions);
+  };
 
-    }
-    else
-      alert("only 4 options can be added")
-  }
+  const handleAnswerChange = (event, questionIndex) => {
+    const { value } = event.target;
+    const updatedQuestions = [...questions];
+    updatedQuestions[questionIndex].answerIndex = parseInt(value);
+    setQuestions(updatedQuestions);
+  };
 
-
-  const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    let payload = {
-      ...inputText,
-      [name]: value
-    };
-    setInputText(payload);
-  }
-
-
+  const handleSubmit = event => {
+    event.preventDefault();
+    const newQuiz = { title, description, questions };
+    alert(`quiz got submited`);
+    console.log(`${newQuiz}`);
+    //axios.post('https://api.example.com/quizzes', newQuiz)
+     // .then(response => {
+       // console.log('Quiz created successfully:', response.data);
+        // Redirect to quiz details page
+     // })
+     // .catch(error => {
+       // console.error('Error creating quiz:', error);
+     // });
+  };
 
   return (
     <>
-      <Box sx={{ '& > :not(style)': { m: 1 } }}>
+    <Box  sx={{
+      width: '100%',
+      height: '100%',
+      textAlign:"center",
+      fontFamily:"Gill Sans",
 
-        <div >
+      color:"whitesmoke",
+      backgroundColor: teal[700],
+      }}>
+    <h1 >Create Quiz</h1>
+    </Box>
+      <Box  sx={{
+        width: '100%',
+       
+        textAlign:"center",
+        fontFamily:"Gill Sans",
+        backgroundColor: teal['A100'],
+        fontSize: 20,
+        fontWeight:500,
+      }}
+    >
+    <div>
+      <form onSubmit={handleSubmit} id="quizContent">
+        <label>
+          Title
+          <TextField id="outlined-basic" variant="outlined" placeholder="Add Tittle" 
+           fullWidth 
+           type="text" 
+           value={title}
+           onChange={e =>{
+            setTitle(e.target.value);           
+          }} required />
+        </label>
+        <br />
+        <label>
+          Description
+          <TextField id="outlined-basic" variant="outlined" 
+          placeholder="Add Description" fullWidth type="text" value={description} onChange={e => setDescription(e.target.value)} />
+        </label>
+        <br />
+<hr/>        
+        {questions.map((question, index) => (
+          <div key={index}>
+            <h3>Question {index + 1}</h3>
+            <label>
+              Question Text:
+              <TextField id="outlined-basic" variant="outlined" placeholder="Add Question" 
+                type="text"
+                name="text"
+                value={question.text}
+                onChange={e => handleQuestionChange(e, index)}
+              />
+            </label>
+            <br />
 
-          <Container style={{ backgroundColor: "pink" }}>
+            {question.options.map((option, optionIndex) => (
+              <label key={optionIndex}>
+                Option {optionIndex + 1}:
+                <TextField id="outlined-basic" variant="outlined" placeholder="Add option" fullWidth 
+                  type="text"
+                  value={option}
+                  onChange={e =>{ handleOptionChange(e, index, optionIndex)}}
+                />
+              </label>
+            ))}
 
-            <TextField id="outlined-basic" variant="outlined" fullWidth type="text" placeholder="Add Question" name="question" value={inputText.question} onChange={onChangeHandler} />
-            <TextField id="outlined-basic" variant="outlined" placeholder="Add Options" name="option" value={optionList.option} onChange={onChangeHandler} />
-            <Button variant="contained" color="primary" onClick={() => { setCount(count => count + 1); clickHandler(inputText.option) }} type="button" >
-              Add option
+            <br />
+            <label>
+              Correct Answer:
+              <select
+                value={question.answerIndex}
+                onChange={e => handleAnswerChange(e, index)}
+              >
+                {question.options.map((_, optionIndex) => (
+                  <option key={optionIndex} value={optionIndex}>
+                    Option {optionIndex + 1}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <br />
+
+            <Button  variant="outlined" color="error" startIcon={<DeleteIcon />} size="small" type="button" onClick={() => handleRemoveQuestion(index)}>
+              Remove Question
             </Button>
+            <hr />
+          </div>
+        ))}
 
-            {/*Component to render options start here */}
-            <TableHead align="center">
-              <TableRow>
-                <TableCell align="center">Option number</TableCell>
-                <TableCell align="center">option</TableCell>
-                <TableCell align="center"></TableCell>
-
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {(optionList || []).map(function (x, key) {
-                return (<TableRow>
-                  <TableCell align="center">{key + 1}</TableCell>
-                  <TableCell align="center">{x.option}</TableCell>
-                </TableRow>
-                )
-
-              })}
-            </TableBody>
-            {/*Component to render options ends here */}
-
-            <Button variant="contained" color="primary" onClick={() => { onSave(inputText) }} type="button" >
-              Save question
-            </Button>
-          </Container>
-
-
-        </div>
-        <TableContainer component={Paper}>
-          <h2>Quiz question </h2>
-          <Table aria-label="simple table">
-
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">ID</TableCell>
-                <TableCell align="center">Your Question</TableCell>
-                <TableCell align="right">Options </TableCell>
-                
-                <TableCell align="center">Delete</TableCell>
-                <TableCell align="center">Edit</TableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {(inputList || []).map(function (el, key) {
-                return (
-                  <>
-                    <TableRow >
-                      <TableCell align="center">{key + 1}</TableCell>
-                      <TableCell align="center">{el.question}</TableCell>
-                      <TableCell align="center">
-                        <TableHead>
-                           <TableRow>
-                            <TableCell align="center">Option number</TableCell>
-                            <TableCell align="center">Option</TableCell>
-
-                           </TableRow>
-                           </TableHead>
-                           <TableBody>
-                        {(optionList || []).map(function (x, key) {
-                          return (<TableRow>
-                            <TableCell align="center">{key + 1}</TableCell>
-                            <TableCell align="center">{x.option}</TableCell>
-                          </TableRow>
-                          )
-                        })} 
-                        </TableBody>
-                        </TableCell>
-                      <TableCell align="center">
-                        <Button variant="contained" color="primary" onClick={() => deleteBtnHandler(el.id)} type="button" >
-                          <span ><b>X</b></span>
-                        </Button>
-                      </TableCell >
-                      <TableCell align="center">
-                        <Button variant="contained" color="primary" onClick={() => editBtnHandler(el.id)} type="button" style={{ color: "black" }} >
-                          <Fab color="secondary" aria-label="edit">
-                            <EditIcon />
-                          </Fab>                      </Button>
-
-                      </TableCell>
-                    </TableRow>
-
-                  </>
-                )
-              }
-              )}
-
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-      </Box>
+        <Button  variant="contained" color="secondary" size="small" type="button" onClick={handleAddQuestion}>
+          Add Question
+        </Button>
+        <br />
+        <Button  variant="contained" color="secondary" size="small" type="submit">Submit quiz</Button>
+      </form>
+    </div>
+    </Box>
     </>
   );
 }
 
 export default McqSingle
-

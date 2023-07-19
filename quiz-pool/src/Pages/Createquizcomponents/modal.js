@@ -8,7 +8,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
-import Common from './common'
 import McqSingle from './mcqsingle';
 import McqMulti from './mcqmulti';
 import ShortAnswer from './shortanswer';
@@ -38,7 +37,6 @@ export default function QuestionModal() {
   //Visible content will be inside return
   return (
     <div>
-      <Common /> {/*It renders the title box */}
       <Modal
         onLoad={handleOpen}
         open={open}
@@ -74,9 +72,7 @@ export default function QuestionModal() {
       {click && selectedOption === "shortanswer" && <ShortAnswer />}
       {click && selectedOption === "descriptive" && <Descriptive />}
       
-      <Button variant="contained" color="primary"   >
-          Submit Quiz
-        </Button>
+      
     </div>
   );
 }
