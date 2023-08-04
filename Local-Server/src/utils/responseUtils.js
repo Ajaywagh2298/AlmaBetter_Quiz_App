@@ -34,13 +34,13 @@ const internalError = {
   message: "Internal server error",
 };
 
-const userNotRegistered = "user not registered";
-const invalidUsernameOrPassword = "invalid username or password";
+const userNotRegistered = "User not Registered";
+const invalidUsernameOrPassword = "Invalid Username or Password";
 
 const successRequest = {
     name: "successRequest",
     code: 200,
-    message: "Success Request",
+    message: "Process completed successfully.",
 }
 
 module.exports = {
