@@ -21,7 +21,7 @@ const DashboardHeaderComponents =()=> {
                       />
                     </Typography>
                     <Button ><Typography className={"nav-button"}>Home</Typography></Button>
-                    <Button ><Typography className={"nav-button"}>My Quiz</Typography></Button>
+                    <Button><Typography className={"nav-button"}>My Quiz</Typography></Button>
                 </Toolbar>
             </AppBar>
         </Box>
